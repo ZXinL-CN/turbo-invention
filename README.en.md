@@ -1,7 +1,7 @@
-# BARTram_v2_client
+# wangpeiqi1
 
 #### Description
-BARTeam团队管理系统客户端2.0
+{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
 
 #### Software Architecture
 Software architecture description
