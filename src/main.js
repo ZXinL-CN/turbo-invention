@@ -1,6 +1,7 @@
 import Vue from 'vue'
 //  导入element-ui插件
-import './plugins/element'
+// import './plugins/element'
+import ELEMENT from 'element-ui'
 // 导入element-ui的css文件
 import 'element-ui/lib/theme-chalk/index.css'
 // 导入 axios
@@ -13,6 +14,7 @@ import router from './router'
 //  导入全局样式表
 import './assets/css/global.css'
 import 'mavon-editor/dist/css/index.css'
+Vue.use(ELEMENT)
 
 Vue.use(mavonEditor)
 axios.defaults.withCredentials = true

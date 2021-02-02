@@ -85,7 +85,7 @@ export default {
       if (this.pwdform.new_pwd === this.pwdform.queren_pwd) {
         this.$http.put('myself/password', this.pwdform)
           .then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.data.meta.success !== true) {
               return this.$message.error('密码修改失败')
             } else {

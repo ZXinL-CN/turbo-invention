@@ -83,18 +83,19 @@ export default {
   methods: {
     // 获取日志列表
     getlogslist () {
-      console.log(this.queryinfo)
+      // console.log(this.queryinfo)
       this.$http.get(`logs?author_id=${this.queryinfo.author_id}&keyword=${this.queryinfo.keyword}`)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           const list = response.data.data
           this.getlog = list.map(item => {
             item.creator_time = moment(new Date(item.creator_time)).format('YYYY-MM-DD HH:mm:ss')
             return item
           })
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(function (error) { // 请求失败处理
-          console.log(error)
+          // console.log(error)
         })
     },
     // 点击查看日志按钮跳转到日志详情页,并将查看日志的id传到日志详情页中
@@ -114,7 +115,7 @@ export default {
       this.$router.push('/addlog')
     },
     handleChange (val) {
-      console.log(val)
+      // console.log(val)
     },
     draftlist () {
       this.$router.push('/drafts')

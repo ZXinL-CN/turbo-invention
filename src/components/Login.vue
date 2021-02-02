@@ -87,7 +87,7 @@ export default {
             if (res.data.meta.success === true) {
               // 提示登录成功
               this.$message.success('登录成功')
-              console.log(res)
+              // console.log(res)
               window.sessionStorage.setItem('id', res.data.data.id)
               window.sessionStorage.setItem('token', res.data.data.token)
               window.sessionStorage.setItem('account_number', res.data.data.account_number)
@@ -95,7 +95,7 @@ export default {
               window.sessionStorage.setItem('role_code', res.data.data.role_code)
               // 根据用户权限，动态添加路由
               this.role_code = window.sessionStorage.getItem('role_code')
-              console.log(this.role_code)
+              // console.log(this.role_code)
               if (this.role_code > 0) {
                 initDynamicRoutes()
               }

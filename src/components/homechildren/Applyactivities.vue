@@ -86,7 +86,7 @@ export default {
           files: JSON.stringify(this.activitiesform.files)
         })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success !== true) {
             this.$message.error('发布失败')
           } else {
@@ -102,7 +102,7 @@ export default {
     },
     submitUpload: async function () {
       var formData = new FormData()
-      console.log(this.fileList)
+      // console.log(this.fileList)
       formData.append('file', this.fileList[0])
       var options = {
         headers: {
@@ -115,7 +115,7 @@ export default {
             this.$message.error('上传失败')
           } else {
             this.$message.success('上传成功')
-            console.log(res)
+            // console.log(res)
             this.fileList.pop()
             this.activitiesform.files.push(res.data.data)
           }

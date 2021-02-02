@@ -59,8 +59,9 @@ export default {
             return this.$message.error('获取日志信息失败')
           }
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     },
     // 点击修改按钮，发送请求

@@ -156,7 +156,7 @@ export default {
     getUsers () {
       this.$http.get(`admin/users?account_number=${this.usermessage.account_number}`)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           const list = res.data.data
           this.userform = list.map(item => {
             item.register_time = moment(new Date(item.register_time)).format('YYYY-MM-DD HH:mm:ss')

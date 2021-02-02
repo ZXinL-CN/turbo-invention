@@ -79,8 +79,9 @@ export default {
           // console.log(response)
           this.getdraft = response.data.data
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(function (error) { // 请求失败处理
-          console.log(error)
+          // console.log(error)
         })
     },
     // 点击查看日志草稿按钮跳转到日志草稿详情页,并将查看日志草稿的id传到日志草稿详情页中
@@ -95,7 +96,7 @@ export default {
       })
     },
     handleChange (val) {
-      console.log(val)
+      // console.log(val)
     }
   }
 

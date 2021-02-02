@@ -176,12 +176,13 @@ export default {
         .then(res => {
           // 获取到的数据传递给列表
           this.info = res.data.data
-          console.log(res)
+          // console.log(res)
           this.timer = moment(new Date(this.info.register_time)).format('YYYY-MM-DD HH:mm:ss')
           // console.log(timer)
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(function (error) { // 请求失败处理
-          console.log(error)
+          // console.log(error)
         })
     },
     // 点击修改按钮，获取信息
@@ -197,7 +198,7 @@ export default {
           this.messageform.class = res.data.data.class
           this.messageform.gender = res.data.data.gender
           this.messageform.qq = res.data.data.qq
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success !== true) {
             return this.$message.error('查询用户信息失败')
           }

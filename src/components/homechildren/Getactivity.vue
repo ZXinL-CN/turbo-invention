@@ -97,7 +97,7 @@ export default {
     activitiesmanagement () {
       this.$http.get('admin/activities')
         .then(res => {
-          console.log(res)
+          // console.log(res)
           const list = res.data.data
           this.getActivitiesManage = list.map(item => {
             item.creator_time = moment(new Date(parseInt(item.creator_time))).format('YYYY-MM-DD HH:mm:ss')
@@ -114,7 +114,7 @@ export default {
       }
       this.$http.get('/files/download/' + id).then(res => {
         this.$message.success('正在下载')
-        console.log(res)
+        // console.log(res)
         this.downloadFile(res.data, Date.parse(new Date()) + fileType)
       })
     },
@@ -135,7 +135,7 @@ export default {
     // 修改活动状态
     handleChange (id, state) {
       state = ((Number(state) === 2) ? 1 : 2)
-      console.log(state)
+      // console.log(state)
       this.$http.put('admin/activities/' + id,
         {
           state: state
@@ -148,14 +148,14 @@ export default {
     },
     // 修改时间
     getTime (id, date) {
-      console.log(date)
+      // console.log(date)
       this.$http.put('admin/activities/' + id,
         {
           start_time: date
         })
 
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success !== true) {
             this.$message.error('修改日期失败')
           }

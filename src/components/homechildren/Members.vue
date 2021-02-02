@@ -41,14 +41,15 @@ export default {
           // 判断如果成功，则将获取到的数据添加到页面上，函数执行中止
           if (res.data.meta.success === true) {
             this.tableData = res.data.data
-            console.log(this.tableData)
+            // console.log(this.tableData)
             return
           }
           // 否则显示 '获取成员信息失败'
           this.$message.error('获取成员信息失败')
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     },
 

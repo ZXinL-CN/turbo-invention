@@ -70,7 +70,7 @@ export default {
     releasedraftcontent () {
       this.$http.post('logs/draft', this.releaselog)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success !== true) {
             this.$message.error('生成草稿失败')
           } else {
@@ -85,7 +85,7 @@ export default {
       // console.log(this.this.releaselog.html_content)
       this.$http.post('logs', this.releaselog)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success !== true) {
             this.$message.error('发布失败')
           } else {

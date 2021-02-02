@@ -62,7 +62,7 @@ export default {
     getactivitieslist () {
       this.$http.get('activities')
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.getactivities = res.data.data
           if (res.data.meta.success !== true) {
             this.$message.error('获取活动列表失败')
@@ -75,7 +75,7 @@ export default {
       }
       this.$http.get('/files/download/' + id).then(res => {
         this.$message.success('正在下载')
-        console.log(res)
+        // console.log(res)
         this.downloadFile(res.data, Date.parse(new Date()) + fileType)
       })
     },

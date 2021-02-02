@@ -33,7 +33,7 @@ export default {
     getdraftcontent (id) {
       this.$http.get('logs/draft/' + id)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.meta.success === true) {
             this.getdraft.title = res.data.data.title
             this.getdraft.html_content = res.data.data.html_content
@@ -46,8 +46,9 @@ export default {
             }
           }
         })
+        // eslint-disable-next-line handle-callback-err
         .catch(error => {
-          console.log(error)
+          // console.log(error)
         })
     },
     goBack () {
@@ -75,7 +76,7 @@ export default {
       }
       this.$http.delete('logs/draft/' + this.detaildraftid)
         .then(response => {
-          console.log(response)
+          // console.log(response)
           if (response.data.meta.success !== true) {
             return this.$message.error('删除日志草稿失败')
           } else {
