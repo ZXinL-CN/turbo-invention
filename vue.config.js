@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = {
   productionSourceMap: false,
   configureWebpack: {
@@ -6,6 +7,13 @@ module.exports = {
       axios: 'axios',
       'vue-router': 'VueRouter',
       'element-ui': 'ELEMENT'
-    }
+    },
+    plugins:[
+      new CompressionPlugin({
+        test: /\.js$|\.html$|\.css/,
+        threshold: 10240,
+        deleteOriginalAssets: false
+      })
+    ]
   }
 }
