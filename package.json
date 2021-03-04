@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build2": "vue-cli-service build --report --report-json"
+    "build2": "vue-cli-service build --report --report-json",
+    "serve:dist": "serve -s dist"
   },
   "dependencies": {
     "axios": "^0.21.0",
