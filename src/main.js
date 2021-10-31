@@ -1,3 +1,4 @@
+console.log('我是feature分支')
 import Vue from 'vue'
 //  导入element-ui插件
 // import './plugins/element'
@@ -15,7 +16,6 @@ import router from './router'
 import './assets/css/global.css'
 import 'mavon-editor/dist/css/index.css'
 Vue.use(ELEMENT)
-
 Vue.use(mavonEditor)
 axios.defaults.withCredentials = true
 // 配置请求的根路径
