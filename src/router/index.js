@@ -40,6 +40,7 @@ const router = new VueRouter({
     path: '/login',
     component: resolve => require(['@/components/Login'], resolve)
   },
+  
   {
     path: '/home',
     component: resolve => require(['@/components/Home'], resolve),

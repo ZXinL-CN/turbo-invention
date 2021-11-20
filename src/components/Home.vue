@@ -1,34 +1,43 @@
 <template>
   <el-container class="container">
     <!-- 首部 -->
-    <el-header style="background-color:#f5f5f5;">
+    <el-header style="background-color: #f5f5f5">
       <div>
-        <img
-          src="../assets/images/log.jpg"
-          style="border-radius: 10px;"
-        >
+        <img src="../assets/images/log.jpg" style="border-radius: 10px" />
         <!-- <span>团队</span><br> -->
-        <span style="font-size: 14px; color: #000000; cursor: default;margin-left: 1300px;">{{user_name}}</span>
+        <!-- <span>{{user_name}}</span>
         <span
           style="font-size: 14px; cursor: pointer; margin-left:20px;"
           @click="updatepwd()"
         >修改密码</span>
-      </div>
       <el-button
         @click="loginout"
         style="margin-right: -20px;"
-      >退出</el-button>
+      >退出</el-button> -->
+        
+      </div>
+      <div class="headright">
+          <!-- <span class="demonstration">{{user_name}}</span> -->
+          <el-dropdown trigger="click">
+            <span class="el-dropdown-link">
+              {{user_name}}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="updatepwd()">修改密码</el-dropdown-item>
+              <el-dropdown-item @click.native="loginout"
+                >退出</el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
     </el-header>
     <el-container>
       <!-- 左侧内容区 -->
       <el-aside
-        :width="istoggle ? '64px':'230px'"
-        style="background-color: #f5f5f5;"
+        :width="istoggle ? '64px' : '230px'"
+        style="background-color: #f5f5f5"
       >
-        <div
-          class="toggle-button"
-          @click="togglefoldopen"
-        >|||</div>
+        <div class="toggle-button" @click="togglefoldopen">|||</div>
         <!-- 侧边栏区域 -->
         <el-menu
           background-color="#f5f5f5"
@@ -40,54 +49,53 @@
           default-active="$router.path"
           unique-opened
         >
-
           <!-- <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-comment"></i>
               <span>信息</span>
             </template> -->
-            <el-menu-item index="/myself">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">个人信息</span>
-            </el-menu-item>
-            <el-menu-item index="/activities">
-              <i class="el-icon-s-grid"></i>
-              <span slot="title">活动信息</span>
-            </el-menu-item>
+          <el-menu-item index="/myself">
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">个人信息</span>
+          </el-menu-item>
+          <el-menu-item index="/activities">
+            <i class="el-icon-s-grid"></i>
+            <span slot="title">活动信息</span>
+          </el-menu-item>
           <!-- </el-submenu> -->
           <!-- <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-s-custom"></i>
               <span>成员</span>
             </template> -->
-            <el-menu-item index="/members">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">成员信息</span>
-            </el-menu-item>
+          <el-menu-item index="/members">
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">成员信息</span>
+          </el-menu-item>
           <!-- </el-submenu> -->
           <!-- <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-message-solid"></i>
               <span>动态</span>
             </template> -->
-            <el-menu-item index="/logs">
-              <i class="el-icon-message"></i>
-              <span slot="title">团队动态</span>
-            </el-menu-item>
+          <el-menu-item index="/logs">
+            <i class="el-icon-message"></i>
+            <span slot="title">团队动态</span>
+          </el-menu-item>
           <!-- </el-submenu> -->
           <!-- <el-submenu index="4"  v-show="isShow">
             <template slot="title">
               <i class="el-icon-s-tools"></i>
               <span>管理</span>
             </template> -->
-            <el-menu-item index="/getuser" v-show="isShow">
-              <i class="el-icon-user-solid"></i>
-              <span slot="title">用户管理</span>
-            </el-menu-item>
-            <el-menu-item index="/getactivity" v-show="isShow">
-              <i class="el-icon-s-grid"></i>
-              <span slot="title">活动管理</span>
-            </el-menu-item>
+          <el-menu-item index="/getuser" v-show="isShow">
+            <i class="el-icon-user-solid"></i>
+            <span slot="title">用户管理</span>
+          </el-menu-item>
+          <el-menu-item index="/getactivity" v-show="isShow">
+            <i class="el-icon-s-grid"></i>
+            <span slot="title">活动管理</span>
+          </el-menu-item>
           <!-- </el-submenu> -->
         </el-menu>
       </el-aside>
@@ -101,60 +109,63 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       istoggle: false,
       // account_number: '',
-      user_name: '',
-      role_code: '',
-      isShow: false
-    }
+      user_name: "",
+      role_code: "",
+      isShow: false,
+    };
   },
-  created () {
-    document.title = "BarTeam's homepage"
-    this.showNumber()
-    this.role_code = window.sessionStorage.getItem('role_code')
+  created() {
+    document.title = "BarTeam's homepage";
+    this.showNumber();
+    this.role_code = window.sessionStorage.getItem("role_code");
     if (this.role_code > 0) {
-      this.isShow = true
+      this.isShow = true;
     } else {
-      this.isShow = false
+      this.isShow = false;
     }
   },
-  updated () {
-    this.Activefolding()
+  updated() {
+    this.Activefolding();
   },
   methods: {
-    loginout () {
-      window.sessionStorage.clear()
-      this.$router.push('/login')
+    loginout() {
+      window.sessionStorage.clear();
+      this.$router.push("/login");
     },
-    async showNumber () {
-      const res = await this.$http.get('myself')
-      this.user_name = res.data.data.user_name
+    async showNumber() {
+      const res = await this.$http.get("myself");
+      this.user_name = res.data.data.user_name;
       // console.log(res.data.data.account_number)
     },
     // 侧边栏菜单折叠展开
-    togglefoldopen () {
-      this.istoggle = !this.istoggle
+    togglefoldopen() {
+      this.istoggle = !this.istoggle;
     },
     // 跳转到发布日志和修改日志，侧边栏自动隐藏
-    Activefolding () {
-      const routePath = this.$route.path
-      if (routePath === '/addlog' || routePath === '/updatelog') {
-        this.istoggle = true
+    Activefolding() {
+      const routePath = this.$route.path;
+      if (routePath === "/addlog" || routePath === "/updatelog") {
+        this.istoggle = true;
       }
     },
-    updatepwd () {
-      this.$router.push('/updatepwd')
-    }
-  }
-}
+    updatepwd() {
+      this.$router.push("/updatepwd");
+    },
+  },
+};
 </script>
-<style lang="less" scoped>
+<style lang="less" scope>
 .container {
-  // height: 0;
+  height: 0;
   min-height: 100%;
   /* background-color: #000000; */
+  .headright{
+    float: right;
+  }
 }
 .el-header {
   background-color: #ffffff;
@@ -186,8 +197,8 @@ export default {
   }
 }
 .el-main {
-  background-color: #ffffff;
-  border-left: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    border-left: 1px solid #e5e5e5;
 }
 .toggle-button {
   font-size: 15px;

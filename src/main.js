@@ -6,7 +6,8 @@ import ELEMENT from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 导入 axios
 import axios from 'axios'
-
+import less from 'less'
+Vue.use(less)
 // 导入markdown编辑器，实现日志发布，查询，修改
 import mavonEditor from 'mavon-editor'
 import App from './App.vue'

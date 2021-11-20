@@ -23,10 +23,11 @@ import {
   MessageBox,
   Upload,
   DatePicker,
-  Switch
+  Switch,
+  Dialog
 } from 'element-ui'
 
-Vue.use(Button)
+Vue.use(Button).use(Dialog)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
