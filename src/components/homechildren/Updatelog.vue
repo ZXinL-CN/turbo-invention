@@ -52,7 +52,7 @@ export default {
     },
     // 获取日志信息
     getlogcontent (id) {
-      this.$http.get('logs/' + id)
+      this.reqM1Service('logs/',{id:id},'get')
         .then(res => {
           this.logmessage = res.data.data
           if (res.data.meta.success !== true) {
@@ -66,7 +66,13 @@ export default {
     },
     // 点击修改按钮，发送请求
     updatelog () {
-      this.$http.put('logs/' + this.detaillogid, this.logmessage)
+      let detaillogid = this.detaillogid
+      let logmessage = this.logmessage
+      let params = {
+            detaillogid,
+            logmessage
+      }
+      this.reqM1Service('logs/',params,'put')
         .then(res => {
           if (res.data.meta.success !== true) {
             this.$message.error('修改日志信息失败')

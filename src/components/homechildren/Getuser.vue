@@ -154,7 +154,9 @@ export default {
   },
   methods: {
     getUsers () {
-      this.$http.get(`admin/users?account_number=${this.usermessage.account_number}`)
+      // this.$http.get(`admin/users?account_number=${this.usermessage.account_number}`)
+      // let account_number = this.usermessage.account_number;
+      this.reqM1Service('admin/users',{account_number:this.usermessage.account_number},'get')
         .then(res => {
           // console.log(res)
           const list = res.data.data
@@ -172,7 +174,7 @@ export default {
     addUsers () {
       this.$refs.ruleFormRef.validate(valid => {
         if (!valid) return // 发起添加用户的网络请求
-        this.$http.post('admin/users', this.adduserfrom)
+        this.reqM1Service('admin/users', this.adduserfrom,'post')
           .then(res => {
             if (res.data.meta.success === true) {
               this.$message.success('添加用户成功')

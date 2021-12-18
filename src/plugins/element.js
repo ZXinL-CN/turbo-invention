@@ -24,10 +24,10 @@ import {
   Upload,
   DatePicker,
   Switch,
-  Dialog
 } from 'element-ui'
-
-Vue.use(Button).use(Dialog)
+Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
@@ -46,8 +46,7 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Pagination)
 Vue.use(Dialog)
-Vue.prototype.$message = Message
-Vue.prototype.$confirm = MessageBox.confirm
 Vue.use(Upload)
 Vue.use(DatePicker)
 Vue.use(Switch)
+

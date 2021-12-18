@@ -83,10 +83,10 @@ export default {
   methods: {
     // 获取日志列表
     getlogslist () {
-      // console.log(this.queryinfo)
-      this.$http.get(`logs?author_id=${this.queryinfo.author_id}&keyword=${this.queryinfo.keyword}`)
+      console.log(this.queryinfo)
+      this.reqM1Service(`logs`,'','get')
         .then(response => {
-          // console.log(response)
+          console.log(response)
           const list = response.data.data
           this.getlog = list.map(item => {
             item.creator_time = moment(new Date(item.creator_time)).format('YYYY-MM-DD HH:mm:ss')
@@ -100,7 +100,9 @@ export default {
     },
     // 点击查看日志按钮跳转到日志详情页,并将查看日志的id传到日志详情页中
     getjournal (index) {
+      
       const id = this.getlog[index].id
+      console.log(id)
       this.$router.push({
         path: '/getlogbyid',
         query: {

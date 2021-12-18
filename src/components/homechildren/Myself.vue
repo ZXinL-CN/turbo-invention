@@ -172,7 +172,7 @@ export default {
   methods: {
     // 获取个人信息数据
     getpersonlist () {
-      this.$http.get('myself')
+      this.reqM1Service('myself','','get')
         .then(res => {
           // 获取到的数据传递给列表
           this.info = res.data.data

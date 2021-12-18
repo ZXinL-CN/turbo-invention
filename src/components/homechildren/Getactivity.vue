@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     activitiesmanagement () {
-      this.$http.get('admin/activities')
+      this.reqM1Service('admin/activities','','get')
         .then(res => {
           // console.log(res)
           const list = res.data.data
@@ -112,7 +112,7 @@ export default {
       if (!id) {
         return
       }
-      this.$http.get('/files/download/' + id).then(res => {
+      this.reqM1Service(`/files/download/${id}`,'','get').then(res => {
         this.$message.success('正在下载')
         // console.log(res)
         this.downloadFile(res.data, Date.parse(new Date()) + fileType)
@@ -136,10 +136,11 @@ export default {
     handleChange (id, state) {
       state = ((Number(state) === 2) ? 1 : 2)
       // console.log(state)
-      this.$http.put('admin/activities/' + id,
-        {
-          state: state
-        })
+      // this.$http.put('admin/activities/' + id,
+      //   {
+      //     state: state
+      //   })
+      this.reqM1Service(`admin/activities/${id}`,{state:state})
         .then(res => {
           if (res.data.meta.success !== true) {
             this.$message.error('修改活动状态失败')
@@ -149,10 +150,11 @@ export default {
     // 修改时间
     getTime (id, date) {
       // console.log(date)
-      this.$http.put('admin/activities/' + id,
-        {
-          start_time: date
-        })
+      // this.$http.put('admin/activities/' + id,
+      //   {
+      //     start_time: date
+      //   })
+        this.reqM1Service(`admin/activities/${id}`,{start_time:date},'put')
 
         .then(res => {
           // console.log(res)

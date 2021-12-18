@@ -27,9 +27,12 @@
               <el-dropdown-item @click.native="loginout"
                 >退出</el-dropdown-item
               >
+              <el-dropdown-item @click.native="showper()"
+                >个人信息</el-dropdown-item
+              >
             </el-dropdown-menu>
           </el-dropdown>
-        </div>
+      </div>
     </el-header>
     <el-container>
       <!-- 左侧内容区 -->
@@ -54,10 +57,10 @@
               <i class="el-icon-s-comment"></i>
               <span>信息</span>
             </template> -->
-          <el-menu-item index="/myself">
+          <!-- <el-menu-item index="/myself">
             <i class="el-icon-user-solid"></i>
             <span slot="title">个人信息</span>
-          </el-menu-item>
+          </el-menu-item> -->
           <el-menu-item index="/activities">
             <i class="el-icon-s-grid"></i>
             <span slot="title">活动信息</span>
@@ -132,13 +135,18 @@ export default {
     this.Activefolding();
   },
   methods: {
+    showper(){
+          this.$router.push('/myself')
+    },
     loginout() {
       window.sessionStorage.clear();
       this.$router.push("/login");
     },
-    async showNumber() {
-      const res = await this.$http.get("myself");
+     showNumber() {
+      // const res = await this.$http.get("myself");
+      this.reqM1Service('myself','','get').then(res=>{
       this.user_name = res.data.data.user_name;
+      })
       // console.log(res.data.data.account_number)
     },
     // 侧边栏菜单折叠展开
@@ -165,6 +173,9 @@ export default {
   /* background-color: #000000; */
   .headright{
     float: right;
+    .el-dropdown{
+      cursor: pointer;
+    }
   }
 }
 .el-header {

@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     getactivitieslist () {
-      this.$http.get('activities')
+      this.reqM1Service('activities','','get')
         .then(res => {
           // console.log(res)
           this.getactivities = res.data.data
@@ -73,7 +73,7 @@ export default {
       if (!id) {
         return
       }
-      this.$http.get('/files/download/' + id).then(res => {
+      this.reqM1Service('/files/download',{id:id},'get').then(res => {
         this.$message.success('正在下载')
         // console.log(res)
         this.downloadFile(res.data, Date.parse(new Date()) + fileType)

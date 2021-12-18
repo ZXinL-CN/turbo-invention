@@ -7,14 +7,14 @@
     <el-divider></el-divider>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span><b>成员</b>：{{member.user_name}}</span>
+        <span><b>成员</b>：{{member.name}}</span>
       </div>
       <div class="infoClass">
-        <span><b>学号：</b>{{member.account_number}}</span><br>
-        <span><b>性别：</b>{{member.gender}}</span><br>
-        <span><b>邮箱：</b>{{member.email}}</span><br>
-        <span><b>年级：</b>{{member.grade}}</span><br>
-        <span><b>班级：</b>{{member.class}}</span><br>
+        <span><b>学号：</b>{{member.stuNum}}</span><br>
+        <span><b>年龄：</b>{{member.age}}</span><br>
+        <span><b>班级：</b>{{member.class1}}</span><br>
+        <span><b>爱好：</b>{{member.hobbies}}</span><br>
+        <!-- <span><b>年级：</b>{{member.grade}}</span><br> -->
       </div>
     </el-card>
     <div @click="goBack" style="width: 100%;height: 265px;"></div>
@@ -37,13 +37,17 @@ export default {
   methods: {
     // 使用async await 对promise进行优化
     async selectData (index) {
-      const res = await this.$http.get(`members/${index}`)
+      console.log(index)
+      this.reqM2Service(`memberinfo`,{index},'get').then(res=>{
+        const { data } = res.data
+            if (data) {
+              this.member = data
+            }
+      }).catch(err=>{
+        console.log(err)
+      })
 
-      const { data } = res.data
 
-      if (data) {
-        this.member = data
-      }
 
       // 将通过id获取到的数据渲染到详细信息下
       // this.member = [res.data]

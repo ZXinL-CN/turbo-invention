@@ -1,5 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location, onResolve, onReject) {
+//   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+//   return originalPush.call(this, location).catch(err => err)
+// }
+
 // 路由懒加载
 // const Login = () => import('@/components/Login.vue')
 // const Home = () => import('@/components/Home.vue')
@@ -32,88 +39,98 @@ const getuserRule = {
 }
 
 const router = new VueRouter({
-  routes: [{
-    path: '/',
-    redirect: '/login'
-  },
-  {
-    path: '/login',
-    component: resolve => require(['@/components/Login'], resolve)
-  },
-  
-  {
-    path: '/home',
-    component: resolve => require(['@/components/Home'], resolve),
-    redirect: '/welcome',
-    children: [{
-      path: '/welcome',
-      component: resolve => require(['@/components/homechildren/Welcome'], resolve)
+  routes: [
+
+    {
+      path: '/',
+      redirect: '/login'
+    },
+    // {
+    //   path:'/regist2',
+    //   component:resolve=> require(['@/components/regist'], resolve)
+    // },
+    {
+      path: '/login',
+      component: resolve => require(['@/components/Login'], resolve)
+    },
+    
+    {
+      path: '/home',
+      component: resolve => require(['@/components/Home'], resolve),
+      redirect: '/welcome',
+      children: [{
+          path: '/welcome',
+          component: resolve => require(['@/components/homechildren/Welcome'], resolve)
+        },
+        {
+          path: '/myself',
+          component: resolve => require(['@/components/homechildren/Myself'], resolve)
+        },
+        {
+          path: '/updatepwd',
+          component: resolve => require(['@/components/homechildren/Updatepwd'], resolve)
+        },
+        {
+          path: '/logs',
+          component: resolve => require(['@/components/homechildren/Logs'], resolve)
+        },
+        {
+          path: '/getlogbyid',
+          component: resolve => require(['@/components/homechildren/Getlogbyid'], resolve)
+        },
+        {
+          path: '/addlogaddlog',
+          component: resolve => require(['@/components/homechildren/Addlog'], resolve)
+        },
+        {
+          path: '/updatelog',
+          component: resolve => require(['@/components/homechildren/Updatelog'], resolve)
+        },
+        {
+          path: '/users',
+          component: resolve => require(['@/components/homechildren/Users'], resolve)
+        },
+        {
+          path: '/members',
+          component: resolve => require(['@/components/homechildren/Members'], resolve)
+        },
+        {
+          // 只能跳转到id为数字类型的
+          path: '/memberinfo/:id(\\d+)',
+          // 默认隐藏
+          hidden: true,
+          component: resolve => require(['@/components/homechildren/MemberInfo'], resolve)
+        },
+        {
+          path: '/activities',
+          component: resolve => require(['@/components/homechildren/Activities'], resolve)
+        },
+        {
+          path: '/applyactivities',
+          component: resolve => require(['@/components/homechildren/Applyactivities'], resolve)
+        },
+        {
+          path: '/drafts',
+          component: resolve => require(['@/components/homechildren/Draft'], resolve)
+        },
+        {
+          path: '/getdraftbyid',
+          component: resolve => require(['@/components/homechildren/Getdraftbyid'], resolve)
+        },
+        {
+          path: '/updatedraft',
+          component: resolve => require(['@/components/homechildren/Updatedraft'], resolve)
+        }
+      ]
     },
     {
-      path: '/myself',
-      component: resolve => require(['@/components/homechildren/Myself'], resolve)
+      path: '*',
+      redirect: '/login'
     },
     {
-      path: '/updatepwd',
-      component: resolve => require(['@/components/homechildren/Updatepwd'], resolve)
-    },
-    {
-      path: '/logs',
-      component: resolve => require(['@/components/homechildren/Logs'], resolve)
-    },
-    {
-      path: '/getlogbyid',
-      component: resolve => require(['@/components/homechildren/Getlogbyid'], resolve)
-    },
-    {
-      path: '/addlogaddlog',
-      component: resolve => require(['@/components/homechildren/Addlog'], resolve)
-    },
-    {
-      path: '/updatelog',
-      component: resolve => require(['@/components/homechildren/Updatelog'], resolve)
-    },
-    {
-      path: '/users',
-      component: resolve => require(['@/components/homechildren/Users'], resolve)
-    },
-    {
-      path: '/members',
-      component: resolve => require(['@/components/homechildren/Members'], resolve)
-    },
-    {
-      // 只能跳转到id为数字类型的
-      path: '/memberinfo/:id(\\d+)',
-      // 默认隐藏
-      hidden: true,
-      component: resolve => require(['@/components/homechildren/MemberInfo'], resolve)
-    },
-    {
-      path: '/activities',
-      component: resolve => require(['@/components/homechildren/Activities'], resolve)
-    },
-    {
-      path: '/applyactivities',
-      component: resolve => require(['@/components/homechildren/Applyactivities'], resolve)
-    },
-    {
-      path: '/drafts',
-      component: resolve => require(['@/components/homechildren/Draft'], resolve)
-    },
-    {
-      path: '/getdraftbyid',
-      component: resolve => require(['@/components/homechildren/Getdraftbyid'], resolve)
-    },
-    {
-      path: '/updatedraft',
-      component: resolve => require(['@/components/homechildren/Updatedraft'], resolve)
+      path: '/regist2',
+      component: () => import('@/components/regist.vue'),
     }
-    ]
-  },
-  {
-    path: '*',
-    redirect: '/login'
-  }
   ]
 
 })
@@ -132,7 +149,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 // 根据用户权限动态路由添加
-export function initDynamicRoutes () {
+export function initDynamicRoutes() {
+  console.log(router.app.$options.router.options)
   router.app.$options.router.options.routes[2].children.push(getuserRule)
   router.app.$options.router.options.routes[2].children.push(getactivityRule)
   router.addRoutes(router.app.$options.router.options.routes)

@@ -78,13 +78,13 @@ export default {
   },
   methods: {
     releaseactivitiescontent () {
-      this.$http.post('/activities',
+      this.reqM1Service('activities',
         {
           start_time: this.activitiesform.start_time,
           title: this.activitiesform.title,
           content: this.activitiesform.content,
           files: JSON.stringify(this.activitiesform.files)
-        })
+        },'post')
         .then(res => {
           // console.log(res)
           if (res.data.meta.success !== true) {

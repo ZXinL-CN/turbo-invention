@@ -33,9 +33,11 @@ export default {
   methods: {
     // 获取日志信息
     getlogcontent (id) {
-      this.$http.get('logs/' + id)
+      console.log(id)
+      this.reqM1Service(`logs/${id}`,'','get')
+
         .then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.data.meta.success === true) {
             this.getlog.title = res.data.data.title
             this.getlog.html_content = res.data.data.html_content
@@ -51,7 +53,7 @@ export default {
         })
     },
     goBack () {
-      this.$router.push('/logs')
+      this.$router.go(-1)
     },
     // 点击修改按钮跳转到修改日志页面,并将修改日志的id传到修改日志页中
     updatelog (id) {
@@ -86,6 +88,7 @@ export default {
     }
   },
   created () {
+    console.log(this.$route.query.id)
     // 接收日志列表传过来的id
     this.detaillogid = this.$route.query.id
     // console.log(this.detaillogid)
@@ -110,5 +113,6 @@ article{
 }
 .el-icon-edit{
     margin-right: 30px;
+    display: block;
 }
 </style>

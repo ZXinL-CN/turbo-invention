@@ -31,7 +31,7 @@ export default {
   methods: {
     // 获取日志草稿信息
     getdraftcontent (id) {
-      this.$http.get('logs/draft/' + id)
+      this.reqM1Service('logs/draft/',{id:id})
         .then(res => {
           // console.log(res)
           if (res.data.meta.success === true) {
@@ -52,7 +52,7 @@ export default {
         })
     },
     goBack () {
-      this.$router.push('/drafts')
+      this.$router.push(-1)
     },
     // 点击修改按钮跳转到修改日志草稿页面,并将修改日志草稿的id传到修改日志草稿页中
     updatedraft (id) {
@@ -87,8 +87,10 @@ export default {
     }
   },
   created () {
+    console.log(this.$route.query.id)
     // 接收日志草稿列表传过来的id
     this.detaildraftid = this.$route.query.id
+    console.log(this.detaildraftid)
     // console.log(this.detaillogid)
     this.getdraftcontent(this.detaildraftid)
   }
