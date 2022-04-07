@@ -5,11 +5,9 @@ import './plugins/element'
 import 'element-ui/lib/theme-chalk/index.css'
 // 导入echarts组件
 import echarts from './plugins/echarts'
-Vue.prototype.$echarts = echarts
 // 导入 axios
 import axios from 'axios'
 import less from 'less'
-Vue.use(less)
 // 导入markdown编辑器，实现日志发布，查询，修改
 import mavonEditor from 'mavon-editor'
 import App from './App.vue'
@@ -19,9 +17,12 @@ import './assets/css/global.css'
 import 'mavon-editor/dist/css/index.css'
 
 // 引入baseurl基地址
-import {adressMain} from './utils/util'
+import { adressMain } from './utils/util'
 // 引入公共commonjs方法 封装请求的方法
 import common from './utils/common'
+console.log('我是feature分支')
+Vue.prototype.$echarts = echarts
+Vue.use(less)
 Vue.use(common)
 // 接口1的默认请求地址  朱心亮
 axios.defaults.baseM1URL = adressMain.Base_M1_url
@@ -39,10 +40,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 // http request 拦截器
 
 axios.interceptors.request.use(function (config) {
-    // if(objService.serAddress === '0'){
-    //     axios.defaults.baseURL = objService.zhuService.baseurl;
-    // }
-    console.log(config)
+  // if(objService.serAddress === '0'){
+  //     axios.defaults.baseURL = objService.zhuService.baseurl;
+  // }
+  console.log(config)
   // let user = window.sessionStorage.getItem("user")
   // let tok = JSON.parse(user)
   const token = window.sessionStorage.getItem('token')
