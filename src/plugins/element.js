@@ -23,7 +23,7 @@ import {
   MessageBox,
   Upload,
   DatePicker,
-  Switch,
+  Switch
 } from 'element-ui'
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
@@ -49,4 +49,3 @@ Vue.use(Dialog)
 Vue.use(Upload)
 Vue.use(DatePicker)
 Vue.use(Switch)
-
