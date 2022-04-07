@@ -5,94 +5,93 @@ Vue.use(VueRouter)
 // 动态路由
 const getactivityRule = {
   path: '/getactivity',
-  component: resolve => require(['@/components/homechildren/Getactivity'], resolve)
+  component: () => import('@/components/homechildren/Getactivity')
 }
 const getuserRule = {
   path: '/getuser',
-  component: resolve => require(['@/components/homechildren/Getuser'], resolve)
+  component: () => import('@/components/homechildren/Getuser')
 }
 
 const router = new VueRouter({
   routes: [
-
     {
       path: '/',
       redirect: '/login'
     },
     // {
     //   path:'/regist2',
-    //   component:resolve=> require(['@/components/regist'], resolve)
+    //   component:resolve=> require('@/components/regist')
     // },
     {
       path: '/login',
-      component: resolve => require(['@/components/Login'], resolve)
+      component: () => import('@/components/Login')
     },
     {
       path: '/home',
-      component: resolve => require(['@/components/Home'], resolve),
+      component: () => import('@/components/Home'),
       redirect: '/welcome',
       children: [{
         path: '/welcome',
-        component: resolve => require(['@/components/homechildren/Welcome'], resolve)
+        component: () => import('@/components/homechildren/Welcome')
       },
       {
         path: '/myself',
-        component: resolve => require(['@/components/homechildren/Myself'], resolve)
+        component: () => import('@/components/homechildren/Myself')
       },
       {
         path: '/updatepwd',
-        component: resolve => require(['@/components/homechildren/Updatepwd'], resolve)
+        component: () => import('@/components/homechildren/Updatepwd')
       },
       {
         path: '/logs',
-        component: resolve => require(['@/components/homechildren/Logs'], resolve)
+        component: () => import('@/components/homechildren/Logs')
       },
       {
         path: '/getlogbyid',
-        component: resolve => require(['@/components/homechildren/Getlogbyid'], resolve)
+        component: () => import('@/components/homechildren/Getlogbyid')
       },
       {
         path: '/addlogaddlog',
-        component: resolve => require(['@/components/homechildren/Addlog'], resolve)
+        component: () => import('@/components/homechildren/Addlog')
       },
       {
         path: '/updatelog',
-        component: resolve => require(['@/components/homechildren/Updatelog'], resolve)
+        component: () => import('@/components/homechildren/Updatelog')
       },
       {
         path: '/users',
-        component: resolve => require(['@/components/homechildren/Users'], resolve)
+        component: () => import('@/components/homechildren/Users')
       },
       {
         path: '/members',
-        component: resolve => require(['@/components/homechildren/Members'], resolve)
+        component: () => import('@/components/homechildren/Members')
       },
       {
         // 只能跳转到id为数字类型的
         path: '/memberinfo/:id(\\d+)',
         // 默认隐藏
         hidden: true,
-        component: resolve => require(['@/components/homechildren/MemberInfo'], resolve)
+        component: () => import('@/components/homechildren/MemberInfo')
       },
       {
         path: '/activities',
-        component: resolve => require(['@/components/homechildren/Activities'], resolve)
+        component: () => import('@/components/homechildren/Activities')
       },
       {
         path: '/applyactivities',
-        component: resolve => require(['@/components/homechildren/Applyactivities'], resolve)
+        component: () => import('@/components/homechildren/Applyactivities')
       },
       {
         path: '/drafts',
-        component: resolve => require(['@/components/homechildren/Draft'], resolve)
+        component: () => import('@/components/homechildren/Draft')
       },
       {
         path: '/getdraftbyid',
-        component: resolve => require(['@/components/homechildren/Getdraftbyid'], resolve)
+        component: () => import('@/components/homechildren/Getdraftbyid')
       },
       {
         path: '/updatedraft',
-        component: resolve => require(['@/components/homechildren/Updatedraft'], resolve)
+        component: () => import('@/components/homechildren/Updatedraft')
       }
       ]
     },

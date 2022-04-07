@@ -43,142 +43,113 @@
   </div>
 </template>
 <script>
-import { initDynamicRoutes } from "../router/index.js";
-import axios from "axios";
+import { initDynamicRoutes } from '../router/index.js'
+import axios from 'axios'
 export default {
-  data() {
+  data () {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        account_number: "",
-        account_password: "",
+        account_number: '',
+        account_password: ''
       },
       // 验证表单用户名和密码的合法性
       loginFormrules: {
         account_number: [
-          { required: true, message: "请输入账号", trigger: "blur" },
+          { required: true, message: '请输入账号', trigger: 'blur' }
         ],
         account_password: [
-          { required: true, message: "请输入密码", trigger: "change" },
-        ],
+          { required: true, message: '请输入密码', trigger: 'change' }
+        ]
       },
-      role_code: "",
-    };
+      role_code: ''
+    }
   },
-  created() {
-    document.title = "Sign in";
+  created () {
+    document.title = 'Sign in'
     this.loginForm.account_number =
-      window.sessionStorage.getItem("account_number");
-    var _self = this;
+      window.sessionStorage.getItem('account_number')
+    var _self = this
     document.onkeydown = function (e) {
-      var key = window.event.keyCode;
+      var key = window.event.keyCode
       if (key === 13) {
-        _self.login("loginForm"); // 自己写的登录方法，点击事件
+        _self.login('loginForm') // 自己写的登录方法，点击事件
       }
-    };
+    }
   },
   methods: {
     // 注册
-    
-    login() {
+
+    login () {
       console.log(this.$router)
-      let that = this;
-      console.dir(axios);
+      const that = this
+      console.dir(axios)
       //    登录请求
       //   1项目中除了登陆之外的其他API接口，必须在登陆之后才能访问
       this.$refs.loginFormref.validate((valid) => {
-        if (!valid) return; // 发起修改信息的网络请求
+        if (!valid) return // 发起修改信息的网络请求
         axios
           .all([
             this.reqM1Service(
-              "login",
+              'login',
               {
                 account_number: this.loginForm.account_number,
-                account_password: this.loginForm.account_password,
+                account_password: this.loginForm.account_password
               },
-              "post"
+              'post'
             ),
             this.reqM1Service(
-              "login",
+              'login',
               {
                 account_number: this.loginForm.account_number,
-                account_password: this.loginForm.account_password,
+                account_password: this.loginForm.account_password
               },
-              "post"
-            ),
+              'post'
+            )
           ])
 
           .then(
             axios.spread(function (res, perms) {
-              console.log(res, perms);
+              console.log(res, perms)
               if (res.data.meta.success === true) {
                 //  console.log(this)
                 // 提示登录成功
                 // this.$message.success("登录成功");
                 // console.log(res)
-                window.sessionStorage.setItem("id", res.data.data.id);
-                window.sessionStorage.setItem("token", res.data.data.token);
+                window.sessionStorage.setItem('id', res.data.data.id)
+                window.sessionStorage.setItem('token', res.data.data.token)
                 window.sessionStorage.setItem(
-                  "account_number",
+                  'account_number',
                   res.data.data.account_number
-                );
+                )
                 window.sessionStorage.setItem(
-                  "account_name",
+                  'account_name',
                   res.data.data.user_name
-                );
+                )
                 window.sessionStorage.setItem(
-                  "role_code",
+                  'role_code',
                   res.data.data.role_code
-                );
+                )
                 // 根据用户权限，动态添加路由
-                that.role_code = window.sessionStorage.getItem("role_code");
+                that.role_code = window.sessionStorage.getItem('role_code')
                 // console.log(this.role_code)
                 if (that.role_code > 0) {
-                  initDynamicRoutes();
+                  initDynamicRoutes()
                 }
                 // 2、通过编程式导航跳转到后台主页，路由地址是/home
-                that.$router.push("home").catch((err) => {console.log(err)});
+                that.$router.push('home').catch((err) => { console.log(err) })
               } else {
-                that.$message.error("登录失败");
+                that.$message.error('登录失败')
               }
             })
-          );
-
-        // ).then((res) => {
-        //   if (res.data.meta.success === true) {
-        //     // 提示登录成功
-        //     this.$message.success("登录成功");
-        //     // console.log(res)
-        //     window.sessionStorage.setItem("id", res.data.data.id);
-        //     window.sessionStorage.setItem("token", res.data.data.token);
-        //     window.sessionStorage.setItem(
-        //       "account_number",
-        //       res.data.data.account_number
-        //     );
-        //     window.sessionStorage.setItem(
-        //       "account_name",
-        //       res.data.data.user_name
-        //     );
-        //     window.sessionStorage.setItem("role_code", res.data.data.role_code);
-        //     // 根据用户权限，动态添加路由
-        //     this.role_code = window.sessionStorage.getItem("role_code");
-        //     // console.log(this.role_code)
-        //     if (this.role_code > 0) {
-        //       initDynamicRoutes();
-        //     }
-        //     // 2、通过编程式导航跳转到后台主页，路由地址是/home
-        //     this.$router.push("/home").catch(() => {});
-        //   } else {
-        //     this.$message.error("登录失败");
-        //   }
-        // });
-      });
+          )
+      })
     },
-    reset() {
-      this.loginForm = [];
-    },
-  },
-};
+    reset () {
+      this.loginForm = []
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 /* body{
