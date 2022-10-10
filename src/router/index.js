@@ -24,11 +24,11 @@ const router = new VueRouter({
     // },
     {
       path: '/login',
-      component: () => import('@/components/Login')
+      component: () => import('@/views/login/Index')
     },
     {
       path: '/home',
-      component: () => import('@/components/Home'),
+      component: () => import('@/views/home/Index'),
       redirect: '/welcome',
       children: [{
         path: '/welcome',
