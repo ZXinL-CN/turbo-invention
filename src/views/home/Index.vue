@@ -37,7 +37,7 @@
                 <span>成员</span>
             </template>-->
             <el-menu-item index="/members">
-              <span slot="title">成员信息</span>
+              <span slot="title">成员信息111</span>
             </el-menu-item>
             <!-- </el-submenu> -->
             <!-- <el-submenu index="3">
