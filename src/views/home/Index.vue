@@ -1,32 +1,11 @@
 <template>
     <el-container class="container">
       <!-- 首部 -->
-      <el-header style="background-color: #f5f5f5">
+      <el-header style="background-color: #fff">
         <div>
           <img src="../../assets/images/log.jpg" style="border-radius: 10px" />
         </div>
-        <div class="headright">
-          <!-- <span class="demonstration">{{user_name}}</span> -->
-          <el-dropdown trigger="click">
-            <span class="el-dropdown-link">
-              {{ user_name }}
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="updatepwd()">修改密码</el-dropdown-item>
-              <el-dropdown-item @click.native="loginout">退出</el-dropdown-item>
-              <el-dropdown-item @click.native="showper()">个人信息</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </el-header>
-      <el-container>
-        <!-- 左侧内容区 -->
-        <el-aside :width="istoggle ? '64px' : '230px'" style="background-color: #f5f5f5">
-          <div class="toggle-button" @click="togglefoldopen">|||</div>
-          <!-- 侧边栏区域 -->
-          <el-menu
-            background-color="#f5f5f5"
+        <el-menu
             text-color="#000000"
             active-text-color="#ffd04b"
             :collapse="istoggle"
@@ -34,9 +13,9 @@
             :default-active = "defaultCurrentPath"
             :router="true"
             unique-opened
+            mode="horizontal"
           >
           <el-menu-item index="/welcome">
-              <i class="el-icon-user-solid"></i>
               <span slot="title">首页</span>
             </el-menu-item>
             <!-- <el-submenu index="1">
@@ -49,7 +28,6 @@
               <span slot="title">个人信息</span>
             </el-menu-item>-->
             <el-menu-item index="/activities">
-              <i class="el-icon-s-grid"></i>
               <span slot="title">活动信息</span>
             </el-menu-item>
             <!-- </el-submenu> -->
@@ -59,7 +37,6 @@
                 <span>成员</span>
             </template>-->
             <el-menu-item index="/members">
-              <i class="el-icon-user-solid"></i>
               <span slot="title">成员信息</span>
             </el-menu-item>
             <!-- </el-submenu> -->
@@ -69,7 +46,6 @@
                 <span>动态</span>
             </template>-->
             <el-menu-item index="/logs">
-              <i class="el-icon-message"></i>
               <span slot="title">团队动态</span>
             </el-menu-item>
             <!-- </el-submenu> -->
@@ -79,16 +55,35 @@
                 <span>管理</span>
             </template>-->
             <el-menu-item index="/getuser" v-show="isShow">
-              <i class="el-icon-user-solid"></i>
               <span slot="title">用户管理</span>
             </el-menu-item>
             <el-menu-item index="/getactivity" v-show="isShow">
-              <i class="el-icon-s-grid"></i>
               <span slot="title">活动管理</span>
             </el-menu-item>
             <!-- </el-submenu> -->
           </el-menu>
-        </el-aside>
+        <div class="headright">
+          <!-- <span class="demonstration">{{user_name}}</span> -->
+          <el-dropdown trigger="click">
+            <span class="el-dropdown-link">
+              {{ user_name }}
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="updatepwd()">修改密码</el-dropdown-item>
+              <el-dropdown-item @click.native="showper()">个人信息</el-dropdown-item>
+              <el-dropdown-item @click.native="loginout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </el-header>
+      <el-container>
+        <!-- 左侧内容区 -->
+        <!-- <el-aside :width="istoggle ? '64px' : '230px'" style="background-color: #fff">
+          <div class="toggle-button" @click="togglefoldopen">|||</div>
+           侧边栏区域 
+          
+        </el-aside> -->
         <!-- 右侧内容区 -->
         <el-main>
           <!-- 路由占位符 -->
@@ -132,14 +127,6 @@
       this.Activefolding()
     },
     methods: {
-        getCurrentMenu(){
-            // 获取当前页面 菜单刷新后能自动选中
-		let currentUrl = window.location.href
-        console.log('C',window.location);
-		let currentPage = currentUrl.split('/')[3].replace('#', '')
-        console.log('cur',currentUrl);
-		this.currentMenu = currentPage
-        },
       showper () {
         this.$router.push('/myself')
       },
@@ -175,17 +162,18 @@
   .container {
     height: 0;
     min-height: 100%;
-    /* background-color: #000000; */
     .headright {
       float: right;
+      background-color: #fff;
       .el-dropdown {
+        font-size: 16px;
         cursor: pointer;
       }
     }
   }
   .el-header {
     background-color: #ffffff;
-    border: 1px solid #e5e5e5;
+    // border: 1px solid #e5e5e5;
     box-shadow: 0 3px 0 #e5e5e5;
     display: flex;
     justify-content: space-between;
@@ -200,21 +188,34 @@
       margin-left: 15px;
     }
   }
+  .el-header{
+    .el-menu {
+      .el-menu-item{
+
+        font-size: 15px;
+        color:#000 !important;
+        // border-bottom-color: #fff !important;
+      }
+    }
+  }
   .el-header img {
     width: 60px;
     height: 50px;
     margin-top: -2px;
   }
-  .el-aside {
-    background-color: #fafafa;
-    border-right: none;
-    > .el-menu {
-      border-right: none;
-    }
-  }
+  // .el-aside {
+  //   background-color: #fafafa;
+  //   border-right: none;
+  //   > .el-menu {
+  //     border-right: none;
+  //   }
+  // }
   .el-main {
     background-color: #ffffff;
     border-left: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .toggle-button {
     font-size: 15px;
